@@ -68,14 +68,38 @@
 		<div style="margin-top:75px; page-break-before: always">
 			<h5>Buy Scans and Offer Acceptance</h5>
 			<script>var graphs = {{plot_PieChartAdjOffers | safe}}</script>
+			{{textdivs['div_chainlocoffers_pie'] | safe}}
 		</div>
 		<div style="page-break-before: always">
 			<script>var graphs = {{plot_BarChartQuantComp | safe}}</script>
 			{{textdivs['div_ScanSuggestionComp'] | safe}}
 		</div>
 		<div style="page-break-before: always">
-			<script>var graphs = {{plot_BarPlotAdjOffers | safe}}</script>
+			<script>var graphs = {{plot_BarChartChainLocOffers | safe}}</script>
+			{{textdivs['div_ChainLocByLoc'] | safe}}
 		</div>
+		<div style="page-break-before: always">
+			<script>var graphs = {{plot_BarPlotAdjOffers | safe}}</script>
+			{{textdivs['div_PctChangedByLoc_all'] | safe}}
+		</div>
+
+		<!--The following graph muust have its own devoted page, with the text broken out onto the following page-->
+		<div style="page-break-before: always">
+			<h5>Per-Location Metrics</h5>
+			<script>var graphs = {{plot_LinePlotLocScannedItems | safe}}</script>
+		</div>
+		<div style="page-break-before: always">
+				{{textdivs['div_PctItemsScanned_LocGrid'] | safe}}
+		</div>
+		
+		<!--The following graph muust have its own devoted page, with the text broken out onto the following page-->
+		<div style="page-break-before: always">
+			<script>var graphs = {{plot_LinePlotLocAdjItems | safe}}</script>
+		</div>
+		<div style="page-break-before: always">
+				{{textdivs['div_PctSuggestedAdjusted_LocGrid'] | safe}}
+		</div>
+	
 
 	</div>	  
 </main>	
