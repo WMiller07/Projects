@@ -2,15 +2,29 @@
 <html>
 <head lang="en">
      <meta charset="UTF-8">
-     <title>Suggested Offers Release 3 Report</title>
+	 <title>Suggested Offers Release 3 Report</title>
+<script src="static/bootstrap.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-<link href="static/bootstrap.min.css" rel="stylesheet">
+<link href="static/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="static/custom.css" rel="stylesheet" type="text/css">
+<link href="static/print.css" media="print" rel="stylesheet" type="text/css">
 </head>
 <body>
 
+<!--
+<div class="sidebar">
+		<ul>
+		<li><a href="#ItemCosts">Item Costs</a></li>
+		<li><a href="#WaitTimes">Wait Times</a></li>
+		<li><a href="#BuyRejections">Buy Rejections</a></li>
+		<li><a href="#PercentAdjustments">Scanning Percentage, Adjusted Offers</a></li>
+		<li><a href="#PerLocation">Per-Location Metrics</a></li>
+		</ul>
+	</div>
+-->
+	
 <main role="main" class="container">
-
 	<div class="starter-template">
 		<div style="margin-top:50px;">
 			<h2>Suggested Offers Report</h2>
@@ -34,7 +48,8 @@
 			</p>
 		</div>
 		<hr>
-		<div style="margin-top:75px; ">
+		<div style="margin-top: 50px; ">
+			<a name="ItemCosts"></a> 
 			<h5>Effect of Release 3 on Buy Costs</h5>
 			<script>var graphs = {{plot_LineChartAllOffers | safe}}</script>
 			{{textdivs['div_avgoffers_all'] | safe}}
@@ -54,18 +69,21 @@
 		</div>
 
 		<div style="margin-top:75px; page-break-before: always">
+			<a name="WaitTimes"></a> 
 			<h5>Buy Wait Times</h5>
 			<script>var graphs = {{plot_LineChartAvgBuyWait | safe}}</script>
 			{{textdivs['div_avgbuywait_all'] | safe}}
 		</div>
 
 		<div style="margin-top:75px; page-break-before: always">
+			<a name="BuyRejections"></a> 
 			<h5>Rejected Buys</h5>
 			<script>var graphs = {{plot_LineChartRejectedBuys | safe}}</script>
 			{{textdivs['div_rejectedbuys_all'] | safe}}
 		</div>
 
 		<div style="margin-top:75px; page-break-before: always">
+			<a name="PercentAdjustments"></a> 
 			<h5>Buy Scans and Offer Acceptance</h5>
 			<script>var graphs = {{plot_PieChartAdjOffers | safe}}</script>
 			{{textdivs['div_chainlocoffers_pie'] | safe}}
@@ -85,6 +103,7 @@
 
 		<!--The following graph muust have its own devoted page, with the text broken out onto the following page-->
 		<div style="page-break-before: always">
+			<a name="PerLocation"></a>
 			<h5>Per-Location Metrics</h5>
 			<script>var graphs = {{plot_LinePlotLocScannedItems | safe}}</script>
 		</div>
@@ -103,6 +122,7 @@
 
 	</div>	  
 </main>	
+
 
 
 </body>
