@@ -12,11 +12,14 @@
 </head>
 <body>
 
-
+<div class='page-header' style='padding-top: 25px; padding-left: 15%;'>
+	<h2 style='color: #777777;'>Historical Gross Profit Analysis - 8/13/19 MAP</h2>
+	<!--<h4 style='padding-left: 25px;'>8/13/19 MAP</h4>-->
+</div>
 <nav class="sidebar" id="navbar">
-	<div class="btn-group-vertical btn-group-toggle col-md-8" data-toggle="buttons" style='padding-top: 100px;'>
+	<div class="btn-group-vertical btn-group-toggle col-md-8" data-toggle="buttons" style='padding-top: 50px;'>
 			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page1">
-					<input type="checkbox" checked autocomplete="off"/>Scale for Reference
+					<input type="checkbox" checked autocomplete="off"/>Notes & Reference
 			</label>
 			
 			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page2">
@@ -30,6 +33,10 @@
 			
 			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page4">
 					<input type="checkbox" checked autocomplete="off"/>Transactions & New Goods
+			</label>
+
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#PageAdd1">
+				<input type="checkbox" checked autocomplete="off"/>Transaction Count & Composition
 			</label>
 
 			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page5">
@@ -51,6 +58,9 @@
 			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page9">
 					<input type="checkbox" checked autocomplete="off"/>New & Used Product Mix History
 			</label>
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page10">
+					<input type="checkbox" checked autocomplete="off"/>Summary
+			</label>
 	</div>
 </nav>
 <main role="main" class="container col-md-8">
@@ -59,6 +69,14 @@
 
 		<div class="collapse show" id="Page1">
 			<div style="padding-top: 50px;">
+				<p>Note: 
+					Click on an item in the menu bar on the left to show or hide that item. This can be used to compare any charts
+					on this page.<br>
+					Click on any element in a chart legend to hide or show that element. Hover over any line on a chart to
+					show the values on the chart at that point.<br>
+					The charts on this page may not display correctly after resizing the browser window. If this occurs, refresh
+					the page after resizing the window. Pressing the "F5" key will refresh the window in most browsers.
+				</p>
 				<script>var graphs = {{plt_ScaleComparison | safe}}</script>
 				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page1Text" 
 				aria-expanded="false" aria-controls="Page1Text" style="margin-top: 15px; margin-left:100px;">Text</button>
@@ -125,6 +143,28 @@
 					increase has accelerated in the past 2 years - as can be seen from the curvature of the "Avg Sale Amount" line.
 					<br><br>
 					As shown in the previous chart, gross profit has increased, so the loss of transactions has not negatively affected gross profit.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="collapse show" id="PageAdd1">
+			<div style="padding-top: 50px;">
+				<script>var graphs = {{plt_TransCompNewUsed | safe}}</script>
+				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#PageAdd1Text" 
+				aria-expanded="false" aria-controls="PageAdd1Text" style="margin-top: 15px; margin-left:100px;">Text</button>
+				<div class="collapse" id="PageAdd1Text" style="margin-left:100px;">
+					<p>
+					<br>
+					During 2014, the percentage of transactions which were composed mostly of distribution items increased dramatically, 
+					causing a corresponding decrease in transactions which were mostly composed of used items. Since used items almost
+					always have a lower cost than new items, this corresponded with a decline in gross profit. 
+					<br><br>
+					Since 2014, transactions which were primarily made up of distribution have declined faster than our overall decline 
+					in transaction count, and transactions made up primarily of used items have begun to even out. Transactions made up 
+					of 75%-100% used items have begun to increase in recent months.
+					<br><br>
+					The steeper decline of transactions which are mostly new, combined with the levelling off of transactions which are mostly
+					used, has correlated with a strong increase in gross profit.
 					</p>
 				</div>
 			</div>
@@ -212,7 +252,7 @@
 					2014 was 4.47 million, while used quantity purchased in July of 2018 was 3.75 million - a drop of over 16%. 
 					<br><br>
 					Our number of items SIPS'd has continously increased during this time period, recently eclipsing used quantity purchased in some months. While at first
-					it may seem like this may be due to increasing adoption of SIPS combined with catching up on quantity, the lowest percentage of hand-priced inventory of 
+					it might seem like this could be due to increasing adoption of SIPS combined with catching up on quantity, the lowest percentage of hand-priced inventory of 
 					"SIPS'able" item types (everything that is not a comic, magazine, cassette tape, or VHS) was 15%, which was counted in the June 2019 inventory. In January
 					of 2019, this percentage was nearly 19%. 
 					</p>
@@ -276,6 +316,27 @@
 				</div>
 			</div>
 		</div>
+		<div class="collapse show" id="Page10">
+				<div style="padding-top: 75px;">
+					<h4>
+						<ul>
+							<li>(For the sake of planning for the future and accurate accounting for our physical inventories, all used goods received that 
+								are intended for sale should have their quantities entered into the buy module.) 
+							</li><br>
+							<li>Gross profit has recently reached a long-term high. This is primarily due to decreases in new goods purchases, with 
+								used goods replacing new on the sales floor.</li><br>
+							<li>While the increase in gross profit has been significant, it has been limited by failure to fully replace the quantity of
+								new goods with used on the sales floor.
+							</li><br>
+							<li>The largest increases in gross profit were from July of 2017 to July of 2018, when large quantities of used back stock were
+								pushed to the sales floor as new goods received decreased. Since then, used back stock available has been insufficient to 
+								offset the drop in new merchandise, though gross profit has remained at a several year high.
+							</li>
+						</ul>
+					</h4>
+				</div>
+			</div>
+			
 	</div>	  
 </main>	
 
