@@ -31,12 +31,12 @@
 					<input type="checkbox" checked autocomplete="off"/>Income & Transactions
 			</label>
 			
-			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page4">
-					<input type="checkbox" checked autocomplete="off"/>Transactions & New Goods
-			</label>
-
 			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#PageAdd1">
 				<input type="checkbox" checked autocomplete="off"/>Transaction Count & Composition
+			</label>
+
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page4">
+					<input type="checkbox" checked autocomplete="off"/>Transactions & New Goods
 			</label>
 
 			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page5">
@@ -65,9 +65,9 @@
 </nav>
 <main role="main" class="container col-md-8">
 
-	<div class="panel">
+	<div class="row" style="margin: auto;">
 
-		<div class="collapse show" id="Page1">
+		<div class="collapse show col-md-12" id="Page1">
 			<div style="padding-top: 50px;">
 				<p>Note: 
 					Click on an item in the menu bar on the left to show or hide that item. This can be used to compare any charts
@@ -99,7 +99,7 @@
 			</div>
 		</div>  
 
-		<div class="collapse show" id="Page2">
+		<div class="collapse show col-md-12" id="Page2">
 			<div style="padding-top: 50px;">
 				<script>var graphs = {{plt_GrossPurchasesAmtComp | safe}}</script>
 				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page2Text" 
@@ -127,7 +127,7 @@
 			</div>
 		</div>
 
-		<div class="collapse show" id="Page3">
+		<div class="collapse show col-md-12" id="Page3">
 			<div style="padding-top: 50px;">
 				<script>var graphs = {{plt_IncomeTransPctComp | safe}}</script>
 				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page3Text" 
@@ -147,7 +147,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="collapse show" id="PageAdd1">
+		<div class="collapse show col-md-12" id="PageAdd1">
 			<div style="padding-top: 50px;">
 				<script>var graphs = {{plt_TransCompNewUsed | safe}}</script>
 				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#PageAdd1Text" 
@@ -170,7 +170,7 @@
 			</div>
 		</div>
 
-		<div class="collapse show" id="Page4">
+		<div class="collapse show col-md-12" id="Page4">
 			<div style="padding-top: 50px;">
 				<script>var graphs = {{plt_GrossPurchasesPctComp | safe}}</script>
 				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page4Text" 
@@ -191,7 +191,7 @@
 			</div>
 		</div>	
 
-		<div class="collapse show" id="Page5">
+		<div class="collapse show col-md-12" id="Page5">
 			<div style="padding-top: 50px;">
 				<script>var graphs = {{plt_GrossProfitInvQty | safe}}</script>
 				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page5Text" 
@@ -216,7 +216,7 @@
 			</div>
 		</div>
 
-		<div class="collapse show" id="Page6">
+		<div class="collapse show col-md-12" id="Page6">
 			<div style="padding-top: 50px;">
 				<script>var graphs = {{plt_GrossProfitBackstock | safe}}</script>
 				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page6Text" 
@@ -239,7 +239,7 @@
 			</div>
 		</div>
 
-		<div class="collapse show" id="Page7">
+		<div class="collapse show col-md-12" id="Page7">
 			<div style="padding-top: 50px;">
 				<script>var graphs = {{plt_QtyPurchasedPctCompUnAdj | safe}}</script>
 				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page7Text" 
@@ -260,7 +260,7 @@
 			</div>
 		</div>
 
-		<div class="collapse show" id="Page8">
+		<div class="collapse show col-md-12" id="Page8">
 			<div style="padding-top: 50px;">
 				<script>var graphs = {{plt_QtyPurchasedPctCompAdj | safe}}</script>
 				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page8Text" 
@@ -287,7 +287,7 @@
 			</div>
 		</div>
 			
-		<div class="collapse show" id="Page9">
+		<div class="collapse show col-md-12" id="Page9">
 			<div style="padding-top: 50px;">
 				<script>var graphs = {{plt_InvQtyByProductGroup | safe}}</script>
 				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page9Text" 
@@ -316,7 +316,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="collapse show" id="Page10">
+		<div class="collapse show col-md-12" id="Page10">
 				<div style="padding-top: 75px;">
 					<h4>
 						<ul>
@@ -336,7 +336,7 @@
 					</h4>
 				</div>
 			</div>
-			
+		</div>
 	</div>	  
 </main>	
 

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+     <meta charset="UTF-8">
+	 <title>Historical Gross Profit Analysis</title>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+<script src="static/bootstrap.min.js"></script>
+<link href="static/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="static/custom.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div class='page-header' style='padding-top: 25px; padding-left: 15%;'>
+	<h2 style='color: #777777;'>Historical Gross Profit Analysis - 8/13/19 MAP</h2>
+	<!--<h4 style='padding-left: 25px;'>8/13/19 MAP</h4>-->
+</div>
+<nav class="sidebar" id="navbar">
+	<div class="btn-group-vertical btn-group-toggle col-md-8" data-toggle="buttons" style='padding-top: 50px;'>
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page1">
+					<input type="checkbox" checked autocomplete="off"/>Notes & Reference
+			</label>
+			
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page2">
+					<input type="checkbox" checked autocomplete="off"/>Gross Profit & Purchases
+			</label>
+			
+			
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page3">
+					<input type="checkbox" checked autocomplete="off"/>Income & Transactions
+			</label>
+			
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#PageAdd1">
+				<input type="checkbox" checked autocomplete="off"/>Transaction Count & Composition
+			</label>
+
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page4">
+					<input type="checkbox" checked autocomplete="off"/>Transactions & New Goods
+			</label>
+
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page5">
+					<input type="checkbox" checked autocomplete="off"/>Gross Profit & Inventory
+			</label>
+
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page6">
+					<input type="checkbox" checked autocomplete="off"/>Used Backstock & Gross Profit
+			</label>
+
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page7">
+					<input type="checkbox" checked autocomplete="off"/>Used Qty Purchased vs SIPS'd
+			</label>
+
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page8">
+					<input type="checkbox" checked autocomplete="off"/>Used Qty Purchased vs Priced
+			</label>
+	
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page9">
+					<input type="checkbox" checked autocomplete="off"/>New & Used Product Mix History
+			</label>
+			<label class="btn btn-secondary active" data-toggle="collapse" data-target="#Page10">
+					<input type="checkbox" checked autocomplete="off"/>Summary
+			</label>
+	</div>
+</nav>
+<main role="main" class="container col-md-8">
+
+	<!--<div class="panel">-->
+
+		<div class="collapse show" id="Page1">
+			<div style="padding-top: 50px;">
+				<p>Note: 
+					Click on an item in the menu bar on the left to show or hide that item. This can be used to compare any charts
+					on this page.<br>
+					Click on any element in a chart legend to hide or show that element. Hover over any line on a chart to
+					show the values on the chart at that point.<br>
+					The charts on this page may not display correctly after resizing the browser window. If this occurs, refresh
+					the page after resizing the window. Pressing the "F5" key will refresh the window in most browsers.
+				</p>
+				<script>var graphs = {{plt_ScaleComparison | safe}}</script>
+				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page1Text" 
+				aria-expanded="false" aria-controls="Page1Text" style="margin-top: 15px; margin-left:100px;">Text</button>
+				<div class="collapse" id="Page1Text" style="margin-left:100px;">
+					<p>
+					<br><br>
+					For the remainder of this presentation, all trends will be indexed to the same starting point 
+					for the sake of comparison.
+					When looking at indexed trends, it is helpful to remember that percent changes are larger in 
+					amount for larger metrics: a change of $300,000 to income is comparatively smaller than a 
+					$300,000 change to new goods purchases.
+					<br><br>
+					At this scale, fluctuations in gross profit, income, and purchases all look very small; however, our 
+					bottom line is greatly affected by these fluctuations, and it's worth looking at them in detail.
+					<br><br>
+					These metrics, and all that follow, are from stores that are currently open and were open prior to 1/1/2010.
+					</p>
+						
+				</div>
+			</div>
+		</div>  
+
+		<div class="collapse show" id="Page2">
+			<div style="padding-top: 50px;">
+				<script>var graphs = {{plt_GrossPurchasesAmtComp | safe}}</script>
+				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page2Text" 
+				aria-expanded="false" aria-controls="Page2Text" style="margin-top: 15px; margin-left:100px;">Text</button>
+				<div class="collapse" id="Page2Text" style="margin-left:100px;">
+					<p>
+					<br>
+					A more detailed look at our gross profit shows that we recently reached a long-term high of $11 million in
+					comparative-store gross profit in September of 2018. (This also held true for HPB as a whole.) This is an increase of $220,000
+					from 1/1/2011.
+					<br><br>
+					Both income and gross profit dropped dramatically for comparative locations from 1/1/2011 until summer of 2014, when iStore was rolled out chain-wide. 
+					This strongly contributed to chain-wide recovery of income and gross profit.
+					However, income has since remained flat as gross profit has continued to increase.
+					<br><br>
+					Money spent on used goods has continuously declined in this time period, along a trend that does not correlate with either income of
+					gross profit.
+					<br><br>
+					Money spent on new goods has varied significantly during this time period in manner that correlates strongly with gross profit. As new purchases
+					increased in early 2014, gross profit decreased along a similar trend. As new goods purchases decreased beginning in summer of 2014, gross profit 
+					increased, which was also fueled by the introduction of iStore. Since early 2017, new goods purchases have continued to decline. This appears to 
+					correlate with a slight drop in income, but with a large increase in gross profit that closely correlates with it.
+					</p>
+				</div>
+			</div>
+		
+
+		<div class="collapse show" id="Page3">
+			<div style="padding-top: 50px;">
+				<script>var graphs = {{plt_IncomeTransPctComp | safe}}</script>
+				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page3Text" 
+				aria-expanded="false" aria-controls="Page3Text" style="margin-top: 15px; margin-left:100px;">Text</button>
+				<div class="collapse" id="Page3Text" style="margin-left:100px;">
+					<p>
+					<br>
+					One of the biggest factors thought to affect income during this time period is a decline sales transaction count. 
+					This decline has been quite steep, with our number of sales transactions at comparative locations being down 25% from
+					1/1/2011; however, our income at these locations in only down 2.76% during this time period. 
+					<br><br>
+					As our number of transactions has declined, the amount of our average sale has gone up to compensate, and the amount of this
+					increase has accelerated in the past 2 years - as can be seen from the curvature of the "Avg Sale Amount" line.
+					<br><br>
+					As shown in the previous chart, gross profit has increased, so the loss of transactions has not negatively affected gross profit.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="collapse show" id="PageAdd1">
+			<div style="padding-top: 50px;">
+				<script>var graphs = {{plt_TransCompNewUsed | safe}}</script>
+				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#PageAdd1Text" 
+				aria-expanded="false" aria-controls="PageAdd1Text" style="margin-top: 15px; margin-left:100px;">Text</button>
+				<div class="collapse" id="PageAdd1Text" style="margin-left:100px;">
+					<p>
+					<br>
+					During 2014, the percentage of transactions which were composed mostly of distribution items increased dramatically, 
+					causing a corresponding decrease in transactions which were mostly composed of used items. Since used items almost
+					always have a lower cost than new items, this corresponded with a decline in gross profit. 
+					<br><br>
+					Since 2014, transactions which were primarily made up of distribution have declined faster than our overall decline 
+					in transaction count, and transactions made up primarily of used items have begun to even out. Transactions made up 
+					of 75%-100% used items have begun to increase in recent months.
+					<br><br>
+					The steeper decline of transactions which are mostly new, combined with the levelling off of transactions which are mostly
+					used, has correlated with a strong increase in gross profit.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="collapse show" id="Page4">
+			<div style="padding-top: 50px;">
+				<script>var graphs = {{plt_GrossPurchasesPctComp | safe}}</script>
+				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page4Text" 
+				aria-expanded="false" aria-controls="Page4Text" style="margin-top: 15px; margin-left:100px;">Text</button>
+				<div class="collapse" id="Page4Text" style="margin-left:100px;">
+					<p>
+					<br>
+					The quantity of used items purchased has continuously decreased. While it's possible that the decreases in used quantity purchased and 
+					sales transaction countare related , the decreases do not correlate. Note how steep the drop in used quantity purchased was in 2011 to 2015 
+					compared to sales transactions (25% drop in used quantity compared to 11% in sales transactions), whereas recently used quantity purchased 
+					has begun to flatten out as sales transaction count continues to decline.
+					<br><br>
+					The decline in new quantity received follows the exact same trend as the decline in sales transaction count from 2011 through then end of 2016.
+					Beginning in 2017, new quantity drops off much more sharply. Sales transaction count also drops somewhat more sharply during this time period, 
+					though not to the same degree as sales transaction count.
+					</p>
+				</div>
+			</div>
+		</div>	
+
+		<div class="collapse show" id="Page5">
+			<div style="padding-top: 50px;">
+				<script>var graphs = {{plt_GrossProfitInvQty | safe}}</script>
+				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page5Text" 
+				aria-expanded="false" aria-controls="Page5Text" style="margin-top: 15px; margin-left:100px;">Text</button>
+				<div class="collapse" id="Page5Text" style="margin-left:100px;">
+					<p>
+					<br>
+					Looking at inventory available on the sales floor during this time period, it is clear that the decline in new goods received resulted in a 
+					large decline in new quantity available.
+					<br><br>
+					The decline in used purchases did not result in a decline in used merchandise on the sales floor, however. Used quantity available on the sales 
+					floor increased dramatically, which correlated very closely with the increases in gross profit. The increase in used merchandise on the sales floor
+					during 2017 arrested a decline in both income and gross profit, causing a income to even out and slightly increase, and causing gross profit to
+					increase dramatically.
+					<br><br>
+					While used merchandise available did increase dramatically, it did not increase quite enough to offset the decrease in new merchandise in the past year.
+					At beginning of 2018, used quantity on sales floor was up 720k items and new quantity was down 857k. At the beginning of 2019 used quantity was up 722k items
+					and new quantity was down by 1.76 million items. It is likely that the decline in new quantity received was too sharp and dramatic to be compensated for by used 
+					merchandise, but income stayed flat during this time period, regardless.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="collapse show" id="Page6">
+			<div style="padding-top: 50px;">
+				<script>var graphs = {{plt_GrossProfitBackstock | safe}}</script>
+				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page6Text" 
+				aria-expanded="false" aria-controls="Page6Text" style="margin-top: 15px; margin-left:100px;">Text</button>
+				<div class="collapse" id="Page6Text" style="margin-left:100px;">
+					<p>
+					<br>
+					Looking closer into factors affecting used quantity available durign this same time period, it's apparent that the amount of used merchandise not
+					on the sales floor was it its peak during the inventory during the summer of 2017, when we had 1.17 million more used items in backstock than
+					January of 2015, which is nearly 300k higher than any other time period, and is more than double any amount of back stock we've had since.
+					<br><br>
+					Comparing backstock to gross profit, it appears that gross profit greatly benefited from this backstock in the long term. As this back stock was
+					decreased between July of 2017 and January 2018, used quantity availabe on the sales floor dramatically increased, and gross profit increased along
+					with it. With the absence of such significant back stock in July of 2018, used quantity slightly decreased, and gross profit decreased along with it.
+					<br><br>
+					As seen in a previous chart, used purchases were declining dramatically during this time, even as our used quantities on hand were reaching
+					all-time highs. 
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="collapse show" id="Page7">
+			<div style="padding-top: 50px;">
+				<script>var graphs = {{plt_QtyPurchasedPctCompUnAdj | safe}}</script>
+				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page7Text" 
+				aria-expanded="false" aria-controls="Page7Text" style="margin-top: 15px; margin-left:100px;">Text</button>
+				<div class="collapse" id="Page7Text" style="margin-left:100px;">
+					<p>
+					<br>
+					(Note: the data in this chart is not annualized so that the periodic nature of our pricing is clear.)
+					At first glance, it appears as if the quantity of used items purchased during this time period was also declining. Quantity purchased in July of 
+					2014 was 4.47 million, while used quantity purchased in July of 2018 was 3.75 million - a drop of over 16%. 
+					<br><br>
+					Our number of items SIPS'd has continously increased during this time period, recently eclipsing used quantity purchased in some months. While at first
+					it might seem like this could be due to increasing adoption of SIPS combined with catching up on quantity, the lowest percentage of hand-priced inventory of 
+					"SIPS'able" item types (everything that is not a comic, magazine, cassette tape, or VHS) was 15%, which was counted in the June 2019 inventory. In January
+					of 2019, this percentage was nearly 19%. 
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="collapse show" id="Page8">
+			<div style="padding-top: 50px;">
+				<script>var graphs = {{plt_QtyPurchasedPctCompAdj | safe}}</script>
+				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page8Text" 
+				aria-expanded="false" aria-controls="Page8Text" style="margin-top: 15px; margin-left:100px;">Text</button>
+				<div class="collapse" id="Page8Text" style="margin-left:100px;">
+					<p>
+					<br>
+					Adjusting our quantity of items priced to account for 15% which was not SIPS'd, it is apparent that between
+					SIPS and hand-pricing items we've been pricing a significantly higher quantity than we've been entering at the 
+					buy counter, and catching up on pricing items purchased during peak buy season is insufficient to account for this.
+					<br><br>
+					On investigation, this seems to be due to adoption of the "Garrison method" of accounting for buy quantities at a 
+					large number of locations. However, a large number of items that were not paid for are still being priced and product
+					on the sales floor.
+					<br><br> 
+					It has turned out that this method of account for used quantities purchased has exacerbated inventory adjustments rather
+					than alleviated them. Used items unaccounted for, yet put on the sales floor, cause unpredictable fluctations in both 
+					average used item costs and used quantity on sales floor. Our true used cost of goods becomes impossible to calculate.
+					It is the offical recommendation of operations department that all used items intended to be kept for sale are entered into
+					the buy module. When a $0.00 cost is implemented is up to the discretion of DMs, but any quantity of items purchased
+					should be accounted for.
+					</p>
+				</div>
+			</div>
+		</div>
+			
+		<div class="collapse show" id="Page9">
+			<div style="padding-top: 50px;">
+				<script>var graphs = {{plt_InvQtyByProductGroup | safe}}</script>
+				<button class="btn btn-outline-info btn-xs" type="button" data-toggle="collapse" data-target="#Page9Text" 
+				aria-expanded="false" aria-controls="Page9Text" style="margin-top: 15px; margin-left:100px;">Text</button>
+				<div class="collapse" id="Page9Text" style="margin-left:100px;">
+					<p>
+					<br>
+					With new quantity on sales floor decreasing dramatically in recent years, and with shifting market factors affecting
+					item types such as paperbacks, it's interesting to look at how the product mix on the sales floor has changed chain-wide.
+					<br><br>
+					The most dramatic change has been the decrease in new hardbacks, which makes up 1.2 million of the 1.63 million item decrease
+					in new goods on sales floor. All categories of new goods have decreased significantly, however, with new sidelines and new audio 
+					also decreasing by large amounts. 
+					<br><br> 
+					Used hardbacks have increased to partially offset the decrease in new hardbacks, increasing in quantity on sales floor more than any other
+					used item type. Used video (almost entirely DVDs) has increased, as well, making up 214k of the increase in used item count. The count of 
+					periodicals has increased significantly as well, made up primarily of comics. The count of collectible items has dropped in the past year,
+					but this is likely related to the adoption of the full-scan inventory method. Paperbacks have decreased by 330k items since the beginning of 2015. 
+					The increase in DVDs and decrease in paperbacks corresponds with the recommendations made as part of the section surveys done in recent
+					years, and represents a much more profitable profit mix - with space devoted to DVDs generally being much more profitable than PBs.
+					<br><br>
+					Overall, total quantity on sales floor at comparative locations is down 700k items. Increases in used goods on sales floor has historically
+					correlated with increased gross profit, and anything that can be done to fill any empty space with used merchandise is very likely to cause
+					continued increase in gross profit.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="collapse show" id="Page10">
+				<div style="padding-top: 75px;">
+					<h4>
+						<ul>
+							<li>(For the sake of planning for the future and accurate accounting for our physical inventories, all used goods received that 
+								are intended for sale should have their quantities entered into the buy module.) 
+							</li><br>
+							<li>Gross profit has recently reached a long-term high. This is primarily due to decreases in new goods purchases, with 
+								used goods replacing new on the sales floor.</li><br>
+							<li>While the increase in gross profit has been significant, it has been limited by failure to fully replace the quantity of
+								new goods with used on the sales floor.
+							</li><br>
+							<li>The largest increases in gross profit were from July of 2017 to July of 2018, when large quantities of used back stock were
+								pushed to the sales floor as new goods received decreased. Since then, used back stock available has been insufficient to 
+								offset the drop in new merchandise, though gross profit has remained at a several year high.
+							</li>
+						</ul>
+					</h4>
+				</div>
+			</div>
+			
+	</div>	  
+</main>	
+
+
+
+</body>
+</html>
