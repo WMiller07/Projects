@@ -9,52 +9,30 @@ DECLARE @LastR41GenDate DATE
 --4 - Transfer
 --5 – Sale
 
-SELECT 
-	spi.LocationNo,
-	t.isbn10,
-	t.isbn13,
-	t.title,
-	t.author,
-	lc.CatalogID,
-	lc.ItemCode [ItemCodeSips],
-	lc.First_RecordDate [DateInStock],
-	CASE
-		WHEN lc.LifeCycle_Complete = 0
-		AND lc.LastEventType IN (2,3)
-		THEN lc.First_ScanDate
-		END [current_FirstScan],
-	CASE
-		WHEN lc.LifeCycle_Complete = 1
-		AND lc.LastEventType = 5
-		THEN lc.First_ScanDate
-		END [historic_FirstScan],
-	CASE
-		WHEN lc.LifeCycle_Complete = 1
-		AND lc.LastEventType = 4
-		THEN lc.Last_RecordDate
-		END [historic_TrashDate],
-	lc.Sale_Price [RegisterPrice],
-	lc.Last_SaleDate [SaleDate]
-INTO #ScannedItems
-FROM Buy_Analytics..ItemCode_LifeCycle lc
-	INNER JOIN ReportsData..SipsProductInventory spi
-		ON lc.ItemCode = spi.ItemCode
-	INNER JOIN Catalog..titles t
-		ON lc.CatalogID = t.catalogId
-WHERE lc.First_RecordDate > '1/1/2019'
+--SELECT 
+--	spi.LocationNo,
+--	lc.CatalogID,
+--	t.binding,
+--	COUNT(lc.ItemCode) [count_Items],
+--	SUM(lc.Days_Total)/
+--		COUNT(CASE
+--				WHEN lc.LastEventType = 5
+--				THEN lc.ItemCode
+--				END) [AvgAccDays_exp],
+--	SUM(lc.Days_Total)/
+--		COUNT(lc.ItemCode) [AvgAccDays_cur]
+--FROM Buy_Analytics..ItemCode_LifeCycle lc
+--	INNER JOIN ReportsData..SipsProductInventory spi
+--		ON lc.ItemCode = spi.ItemCode
+--	INNER JOIN Catalog..titles t
+--		ON lc.CatalogID = t.catalogId
+--GROUP BY 
+--	spi.LocationNo,
+--	lc.CatalogID,
+--	t.binding
+--WITH ROLLUP
 
 
-SELECT 
-	si.LocationNo,
-	si.CatalogId,
-	si.ISBN13,
-	si.title,
-	si.author,
-	COUNT(si.current_FirstScan) [qty_OnHand]
-INTO #CurrentMultiples
-FROM #ScannedItems si
-GROUP BY si.LocationNo, si.CatalogId, si.ISBN13, si.title, si.author
---HAVING COUNT(si.current_FirstScan) = 1
 
 SELECT 
 	@LastR4GenDate = MAX(ba4.Date_Generated)
@@ -63,6 +41,7 @@ FROM Buy_Analytics..BuyAlgorithm_V1_R4 ba4
 SELECT 
 	@LastR41GenDate = MAX(ba41.Date_Generated)
 FROM Buy_Analytics..BuyAlgorithm_V1_R41 ba41
+
 
 SELECT 
 	ba4.CatalogID,
@@ -83,9 +62,9 @@ WHERE ba41.Date_Generated = @LastR41GenDate
 GROUP BY ba41.CatalogID
 
 
-SELECT DISTINCT
-	bbh.CreateTime,
+SELECT 
 	bbh.LocationNo,
+	bbh.BuyBinNo,
 	bbi.ItemLineNo,
 	bbi.CatalogID,
 	bbi.SuggestedOffer,
@@ -94,7 +73,6 @@ SELECT DISTINCT
 	ISNULL(lba4.Location_Buy_Offer_Pct, cba4.Chain_SuggestedOfferPct) [r4_SuggestedOfferPct],
 	ISNULL(lba41.Location_SuggestedOffer, cba41.Chain_SuggestedOffer) [r41_SuggestedOffer],
 	ISNULL(lba41.Location_Buy_Offer_Pct, cba41.Chain_SuggestedOfferPct) [r41_SuggestedOfferPct]
-INTO #ChangedOffers
 FROM BUYS..BuyBinHeader bbh
 	INNER JOIN BUYS..BuyBinItems bbi
 		ON bbh.BuyBinNo = bbi.BuyBinNo
@@ -120,24 +98,27 @@ WHERE bbi.Scoring_ID IS NOT NULL
 	AND bbh.StatusCode = 1
 	AND bbi.StatusCode = 1
 	AND bbi.Quantity > 0
-ORDER BY bbh.LocationNo, bbh.CreateTime
+ORDER BY bbh.LocationNo, bbh.BuyBinNo, bbi.ItemLineNo
 
-SELECT 
-	co.LocationNo,
-	SUM(co.SuggestedOffer) [total_ActualSuggestedOffer],
-	SUM(co.SuggestedOffer)/SUM(co.Quantity) [avg_ActualSuggestedOffer],
-	SUM(r4_SuggestedOffer) [total_R4SuggestedOffers],
-	SUM(r4_SuggestedOffer)/SUM(co.Quantity) [avg_R4LatestSuggestedOffer],
-	SUM(r41_SuggestedOffer) [total_R41SuggestedOffers],
-	SUM(r41_SuggestedOffer)/SUM(co.Quantity) [avg_R41SuggestedOffer]
-FROM #ChangedOffers co
-GROUP BY LocationNo WITH ROLLUP
-ORDER BY LocationNo
+--SELECT 
+--	CASE 
+--		WHEN GROUPING(co.LocationNo) = 1
+--		THEN 'All'
+--		ELSE co.LocationNo
+--		END [LocationNo],
+--	SUM(co.SuggestedOffer) [total_ActualSuggestedOffer],
+--	SUM(co.SuggestedOffer)/SUM(co.Quantity) [avg_ActualSuggestedOffer],
+--	SUM(r4_SuggestedOffer) [total_R4LatestSuggestedOffers],
+--	SUM(r4_SuggestedOffer)/SUM(co.Quantity) [avg_R4LatestSuggestedOffer],
+--	SUM(r41_SuggestedOffer) [total_R41SuggestedOffers],
+--	SUM(r41_SuggestedOffer)/SUM(co.Quantity) [avg_R41SuggestedOffer]
+--FROM #ChangedOffers co
+--GROUP BY LocationNo WITH ROLLUP
+--ORDER BY LocationNo
 
 
 
 DROP TABLE #ba4ChainOffers
 DROP TABLE #ba41ChainOffers
-DROP TABLE #ScannedItems
-DROP TABLE #CurrentMultiples
-DROP TABLE #ChangedOffers
+
+--DROP TABLE #ChangedOffers

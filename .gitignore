@@ -1,6 +1,1 @@
-/BuyMetrics_R3Reporting/BuyHeaderMetrics.csv
-/BuyMetrics_R3Reporting/BuyItemMetrics.csv
-/BuyMetrics_R3Reporting/BuyTypeMetrics.csv
-/BuyMetrics_R3Reporting/RejectedBuyMetrics.csv
-/BuyMetrics_R3Reporting/R3R4Comp.csv
-/TransactionAnalysis/TransactionAnalysis.csv
+*.csv
