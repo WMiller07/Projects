@@ -2,7 +2,7 @@ DECLARE @LastAlgorithmUpdate DATE
 
 SELECT 
 	@LastAlgorithmUpdate = MAX(Date_Generated) 
-FROM Sandbox..BuyAlgorithm_V1_R4
+FROM Buy_Analytics..BuyAlgorithm_V1_R4
 GROUP BY CatalogID
 
 --Get most recently generated buy offers for all R4 offers, first for location offers, then chain offers
@@ -14,7 +14,7 @@ SELECT
 	ba.Date_Generated,
 	ba.ListPrice
 INTO #R4LastLocOffers 
-FROM Sandbox..BuyAlgorithm_V1_R4 ba
+FROM Buy_Analytics..BuyAlgorithm_V1_R4 ba
 WHERE ba.Date_Generated = @LastAlgorithmUpdate
 
 SELECT 
@@ -24,7 +24,7 @@ SELECT
 	MIN(ba.ListPrice) [ListPrice],
 	MIN(ba.Chain_SuggestedOffer) [Chain_SuggestedOffer]
 INTO #R4LastChainOffers 
-FROM Sandbox..BuyAlgorithm_V1_R4 ba
+FROM Buy_Analytics..BuyAlgorithm_V1_R4 ba
 WHERE ba.Date_Generated = @LastAlgorithmUpdate
 GROUP BY ba.CatalogID, ba.Date_Generated
 
@@ -66,7 +66,7 @@ FROM MathLab..SipsItemKeys_test sik
 	--	ON s.LocationID = slm.LocationId
 	INNER JOIN Sandbox..LocBuyAlgorithms lba
 		ON sik.last_LocationNo = lba.LocationNo
-		AND lba.VersionNo = 'v1.r3'
+		AND lba.VersionNo = 'v1.r4'
 WHERE COALESCE(sis.ScannedOn, sish.ScannedOn, sish17.ScannedOn) < @LastAlgorithmUpdate
 
 
@@ -130,7 +130,7 @@ FROM #CurrentMultiples r3o
 	LEFT OUTER JOIN Sandbox..BuyAlgorithm_AggregateData_Location adl
 		ON r3o.CatalogID = adl.CatalogID
 		AND r3o.LocationNo = adl.LocationNo
-	LEFT OUTER JOIN Sandbox..AccumulatedDaysOnShelf_BuyTable_V1_R4 ot4
+	LEFT OUTER JOIN Buy_Analytics..AccumulatedDaysOnShelf_BuyTable_V1_R4 ot4
 		ON RTRIM(LTRIM(r3o.CatalogBinding)) = RTRIM(LTRIM(ot4.CatalogBinding))
 		AND ISNULL(adl.Total_Accumulated_Days_With_Trash_Penalty/adl.Total_Item_Count, adc.Total_Accumulated_Days_With_Trash_Penalty/adc.Total_Item_Count) >= ot4.AccDaysRangeFrom
 		AND ISNULL(adl.Total_Accumulated_Days_With_Trash_Penalty/adl.Total_Item_Count, adc.Total_Accumulated_Days_With_Trash_Penalty/adc.Total_Item_Count) < ot4.AccDaysRangeTo

@@ -1,21 +1,21 @@
 UPDATE Sandbox..AccumulatedDaysOnShelf_BuyTable_V1_R42
-SET AccDaysRangeTo = 14
+SET AccDaysRangeTo = 13
 WHERE BuyGradeName = 'A'
 
 UPDATE Sandbox..AccumulatedDaysOnShelf_BuyTable_V1_R42
-SET AccDaysRangeFrom = 14, AccDaysRangeTo = 50
+SET AccDaysRangeFrom = 13, AccDaysRangeTo = 41
 WHERE BuyGradeName = 'B'
 
 UPDATE Sandbox..AccumulatedDaysOnShelf_BuyTable_V1_R42
-SET AccDaysRangeFrom = 50, AccDaysRangeTo = 150
+SET AccDaysRangeFrom = 41, AccDaysRangeTo = 130
 WHERE BuyGradeName = 'C'
 
 UPDATE Sandbox..AccumulatedDaysOnShelf_BuyTable_V1_R42
-SET AccDaysRangeFrom = 150, AccDaysRangeTo = 486
+SET AccDaysRangeFrom = 130, AccDaysRangeTo = 270
 WHERE BuyGradeName = 'D'
 
 UPDATE Sandbox..AccumulatedDaysOnShelf_BuyTable_V1_R42
-SET AccDaysRangeFrom = 486, AccDaysRangeTo = 6500
+SET AccDaysRangeFrom = 270, AccDaysRangeTo = 999999
 WHERE BuyGradeName = 'E'
 
 SELECT 
