@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+     <meta charset="UTF-8">
+	 <title>Suggested Offers Release 3 Report</title>
+<script src="static/bootstrap.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+<link href="static/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="static/custom.css" rel="stylesheet" type="text/css">
+<link href="static/print.css" media="print" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<!--
+<div class="sidebar">
+		<ul>
+		<li><a href="#ItemCosts">Item Costs</a></li>
+		<li><a href="#WaitTimes">Wait Times</a></li>
+		<li><a href="#BuyRejections">Buy Rejections</a></li>
+		<li><a href="#PercentAdjustments">Scanning Percentage, Adjusted Offers</a></li>
+		<li><a href="#PerLocation">Per-Location Metrics</a></li>
+		</ul>
+	</div>
+-->
+	
+<main role="main" class="container">
+	<div class="starter-template">
+		<div style="margin-top:50px;">
+			<h2>Suggested Offers Report</h2>
+			<h5 style='margin-left:30px;'>For suggested offers version 1, release 4</h5>
+			<hr>
+		</div>
+		<div style="margin-top:30px; margin-left:75px;">
+			<p>
+				On 6/25/19, suggested offers version 1, release 3 was rolled out to 14 brick-and-mortar locations. 
+				These locations were divided into two groups, "test group 1" and "test group 2", which will be referred to as such throughout this report. 
+			</p>
+			<p>These groups were given the following limitations: 
+				<ul> 
+					<li><b>Test group 1</b> was be asked to scan as much as possible and to accept the offer as 
+					much as possible.</li>
+					
+					<li><b>Test group 2</b> was be asked to scan all HB’s, CDU, & DVD’s and accept all offers returned on these items.  
+					There are exceptions to this rule, for example if there is a condition issue with the item or if there is something collectable about the item like a signature.
+					</li>
+				</ul>
+			</p>
+			<p>
+				On 8/27/19, release 4 was rolled out to the same brick-and-mortar locations. The primary purpose of this release was to address inflated 
+				suggested offers for paperback and CD items.
+				In charts below, vertical red lines mark the date of release 3, and vertical green lines mark the date of release 4.
+			</p>
+		</div>
+		<hr>
+		<div style="margin-top: 50px; ">
+			<a name="ItemCosts"></a> 
+			<h5>Buy Costs</h5>
+			<script>var graphs = {{plot_LineChartAllOffers | safe}}</script>
+		</div>
+		<div style="page-break-before: always">
+			{{textdivs['div_AvgOffers_All'] | safe}}
+		</div>
+		<div style="page-break-before: always">
+			<script>var graphs = {{plot_LineChartSuggestedOffers | safe}}</script>
+			{{textdivs['div_AvgSuggOffers_All'] | safe}}
+		</div>
+		<div style="page-break-before: always">
+			<script>var graphs = {{plot_BarChartScannedScannable | safe}}</script>
+			{{textdivs['div_PctScannedScannable_All'] | safe}}
+		</div>
+		<div style="page-break-before: always">
+			<script>var graphs = {{plot_BarChartScannedSuggested | safe}}</script>
+			{{textdivs['div_PctScannedSuggested_ItemTypes'] | safe}}
+
+		</div>
+		<div style="page-break-before: always">
+			<script>var graphs = {{plot_LineChartAvgSuggestedOffer | safe}}</script>
+			{{textdivs['div_AvgSuggestedOffer_ItemTypes'] | safe}}
+		</div>
+
+		<div style="margin-top:75px; page-break-before: always">
+			<a name="WaitTimes"></a> 
+			<h5>Buy Wait Times</h5>
+			<script>var graphs = {{plot_LineChartAvgBuyWait | safe}}</script>
+			{{textdivs['div_AvgBuyWait_All'] | safe}}
+		</div>
+
+		<div style="margin-top:75px; page-break-before: always">
+			<a name="BuyRejections"></a> 
+			<h5>Rejected Buys</h5>
+			<script>var graphs = {{plot_LineChartRejectedBuys | safe}}</script>
+			{{textdivs['div_RejectedBuys_All'] | safe}}
+		</div>
+
+		<div style="margin-top:75px; page-break-before: always">
+			<a name="PercentAdjustments"></a> 
+			<h5>Buy Scans and Offer Adjustments</h5>
+			<script>var graphs = {{plot_PieChartAdjOffers | safe}}</script>
+			{{textdivs['div_ChainLocOffers_Pie'] | safe}}
+		</div>
+		<!--<div style="page-break-before: always">
+			<script>var graphs = {{plot_BarChartQuantComp | safe}}</script>
+			{{textdivs['div_ScanSuggestionComp'] | safe}}
+		</div>-->
+		<!--<div style="page-break-before: always">
+			<script>var graphs = {{plot_BarChartChainLocOffers | safe}}</script>
+			{{textdivs['div_ChainLocByLoc'] | safe}}
+		</div>-->
+		<div style="page-break-before: always">
+			<script>var graphs = {{plot_BarPlotAdjOffers | safe}}</script>
+			{{textdivs['div_PctChangedByLoc_all'] | safe}}
+		</div>
+
+		<!--The following graph must have its own devoted page with the text broken out onto the following page-->
+		<div style="page-break-before: always">
+			<a name="PerLocation"></a>
+			<h5>Per-Location Metrics</h5>
+			<script>var graphs = {{plot_LinePlotLocScannedItems | safe}}</script>
+		</div>
+		<div>
+				{{textdivs['div_PctItemsScanned_LocGrid'] | safe}}
+		</div>
+		
+		<!--The following graph muust have its own devoted page with the text broken out onto the following page-->
+		<div style="page-break-before: always">
+			<script>var graphs = {{plot_LinePlotLocAdjItems | safe}}</script>
+		</div>
+		<div>
+				{{textdivs['div_PctSuggestedAdjusted_LocGrid'] | safe}}
+		</div>
+		<div style="page-break-before: always">
+			<script>var graphs = {{plot_LinePlotLocRejBuys | safe}}</script>
+		</div>
+		<div>
+			{{textdivs['div_BuyRejections_LocGrid'] | safe}}
+		</div>
+
+	</div>	  
+</main>	
+
+
+
+</body>
+</html>
