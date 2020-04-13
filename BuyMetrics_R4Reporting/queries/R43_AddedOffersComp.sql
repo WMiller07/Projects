@@ -31,16 +31,16 @@ GROUP BY ba.CatalogID
 
 SELECT 
 	ba.CatalogID,
-	'V1.R4.3' [VersionNo],
+	'V1.R4.4' [VersionNo],
 	MIN(ba.Chain_SuggestedOffer) [Chain_SuggestedOffer],
 	MIN(ba.Chain_Buy_Offer_Pct) [Chain_Buy_Offer_Pct]
-INTO #SO_Chain_R43
-FROM Buy_Analytics.dbo.BuyAlgorithm_V1_R43 ba
+INTO #SO_Chain_R44
+FROM Buy_Analytics.dbo.BuyAlgorithm_V1_R44 ba
 INNER JOIN (
 			SELECT 
 				ba.CatalogID,	
 				MAX(ba.InsertDate) last_InsertDate
-			FROM Buy_Analytics.dbo.BuyAlgorithm_V1_R43 ba
+			FROM Buy_Analytics.dbo.BuyAlgorithm_V1_R44 ba
 			GROUP BY ba.CatalogID
 			) m
 	ON ba.CatalogID = m.CatalogID
@@ -72,17 +72,17 @@ GROUP BY ba.CatalogID, ba.LocationNo
 SELECT 
 	ba.CatalogID,
 	ba.LocationNo,
-	'V1.R4.3' [VersionNo],
+	'V1.R4.4' [VersionNo],
 	MIN(ba.Location_SuggestedOffer) [Location_SuggestedOffer],
 	MIN(ba.Location_Buy_Offer_Pct) [Location_Buy_Offer_Pct]
-INTO #SO_Location_R43
-FROM Buy_Analytics.dbo.BuyAlgorithm_V1_R43 ba
+INTO #SO_Location_R44
+FROM Buy_Analytics.dbo.BuyAlgorithm_V1_R44 ba
 	INNER JOIN (
 			SELECT 
 				ba.CatalogID,	
 				ba.LocationNo,
 				MAX(ba.InsertDate) last_InsertDate
-			FROM Buy_Analytics.dbo.BuyAlgorithm_V1_R43 ba
+			FROM Buy_Analytics.dbo.BuyAlgorithm_V1_R44 ba
 			GROUP BY ba.CatalogID, ba.LocationNo
 			) m
 	ON ba.CatalogID = m.CatalogID
@@ -106,9 +106,9 @@ SELECT
 		THEN bbi.Quantity
 		END) [total_R42_Quantity],
 	SUM(CASE
-		WHEN bac43.Chain_SuggestedOffer IS NOT NULL
+		WHEN bac44.Chain_SuggestedOffer IS NOT NULL
 		THEN bbi.Quantity
-		END) [total_R43_Quantity],
+		END) [total_R44_Quantity],
 
 	CAST(SUM(CASE
 		WHEN bbi.Scoring_ID IS NOT NULL
@@ -127,13 +127,13 @@ SELECT
 			THEN bbi.Quantity 
 			END) AS FLOAT) [pct_R42Chain_Quantity],
 	CAST(SUM(CASE
-		WHEN bac43.Chain_SuggestedOffer IS NOT NULL
+		WHEN bac44.Chain_SuggestedOffer IS NOT NULL
 		THEN bbi.Quantity
 		END) AS FLOAT) /
 		CAST(SUM(CASE
 			WHEN bbi.SearchResultSourceID IS NOT NULL
 			THEN bbi.Quantity 
-			END) AS FLOAT) [pct_R43Chain_Quantity],
+			END) AS FLOAT) [pct_R44Chain_Quantity],
 
 	CAST(SUM(CASE
 		WHEN bal42.Location_SuggestedOffer IS NOT NULL
@@ -144,13 +144,13 @@ SELECT
 			THEN bbi.Quantity 
 			END) AS FLOAT) [pct_R42Location_Quantity],
 	CAST(SUM(CASE
-		WHEN bal43.Location_SuggestedOffer IS NOT NULL
+		WHEN bal44.Location_SuggestedOffer IS NOT NULL
 		THEN bbi.Quantity
 		END) AS FLOAT) /
 		CAST(SUM(CASE
 			WHEN bbi.SearchResultSourceID IS NOT NULL
 			THEN bbi.Quantity 
-			END) AS FLOAT) [pct_R43Location_Quantity],
+			END) AS FLOAT) [pct_R44Location_Quantity],
 
 	CAST(SUM(CASE
 		WHEN bbi.Scoring_ID IS NOT NULL
@@ -169,13 +169,13 @@ SELECT
 			THEN bbi.Quantity 
 			END) AS FLOAT) [avg_R42_ChainOffer],
 	CAST(SUM(CASE
-		WHEN bac43.Chain_SuggestedOffer IS NOT NULL
-		THEN bac43.Chain_SuggestedOffer
+		WHEN bac44.Chain_SuggestedOffer IS NOT NULL
+		THEN bac44.Chain_SuggestedOffer
 		END) AS FLOAT) /
 		CAST(SUM(CASE
-			WHEN bac43.Chain_SuggestedOffer IS NOT NULL
+			WHEN bac44.Chain_SuggestedOffer IS NOT NULL
 			THEN bbi.Quantity 
-			END) AS FLOAT) [avg_R43_ChainOffer],
+			END) AS FLOAT) [avg_R44_ChainOffer],
 
 	CAST(SUM(CASE
 		WHEN bal42.Location_SuggestedOffer IS NOT NULL
@@ -186,13 +186,13 @@ SELECT
 			THEN bbi.Quantity 
 			END) AS FLOAT) [avg_R42_LocationOffer],
 	CAST(SUM(CASE
-		WHEN bal43.Location_SuggestedOffer IS NOT NULL
-		THEN bal43.Location_SuggestedOffer
+		WHEN bal44.Location_SuggestedOffer IS NOT NULL
+		THEN bal44.Location_SuggestedOffer
 		END) AS FLOAT) /
 		CAST(SUM(CASE
-			WHEN bal43.Location_SuggestedOffer IS NOT NULL
+			WHEN bal44.Location_SuggestedOffer IS NOT NULL
 			THEN bbi.Quantity 
-			END) AS FLOAT) [avg_R43_LocationOffer],
+			END) AS FLOAT) [avg_R44_LocationOffer],
 
 	CAST(SUM(CASE
 		WHEN ISNULL(bal42.Location_SuggestedOffer, bac42.Chain_SuggestedOffer) IS NOT NULL
@@ -203,13 +203,13 @@ SELECT
 			THEN bbi.Quantity 
 			END) AS FLOAT) [avg_R42_Offer],
 	CAST(SUM(CASE
-		WHEN ISNULL(bal43.Location_SuggestedOffer, bac43.Chain_SuggestedOffer) IS NOT NULL
-		THEN ISNULL(bal43.Location_SuggestedOffer, bac43.Chain_SuggestedOffer)
+		WHEN ISNULL(bal44.Location_SuggestedOffer, bac44.Chain_SuggestedOffer) IS NOT NULL
+		THEN ISNULL(bal44.Location_SuggestedOffer, bac44.Chain_SuggestedOffer)
 		END) AS FLOAT) /
 		CAST(SUM(CASE
-			WHEN ISNULL(bal43.Location_SuggestedOffer, bac43.Chain_SuggestedOffer) IS NOT NULL
+			WHEN ISNULL(bal44.Location_SuggestedOffer, bac44.Chain_SuggestedOffer) IS NOT NULL
 			THEN bbi.Quantity 
-			END) AS FLOAT) [avg_R43_Offer],
+			END) AS FLOAT) [avg_R44_Offer],
 	CAST(SUM(CASE
 		WHEN ISNULL(bal42.Location_SuggestedOffer, bac42.Chain_SuggestedOffer) IS NOT NULL
 		THEN bbi.Offer
@@ -219,13 +219,15 @@ SELECT
 			THEN bbi.Quantity 
 			END) AS FLOAT) [avg_ActualR42_Offer],
 	CAST(SUM(CASE
-		WHEN ISNULL(bal43.Location_SuggestedOffer, bac43.Chain_SuggestedOffer) IS NOT NULL
+		WHEN ISNULL(bal44.Location_SuggestedOffer, bac44.Chain_SuggestedOffer) IS NOT NULL
 		THEN bbi.Offer
 		END) AS FLOAT) /
 		CAST(SUM(CASE
-			WHEN ISNULL(bal43.Location_SuggestedOffer, bac43.Chain_SuggestedOffer) IS NOT NULL
+			WHEN ISNULL(bal44.Location_SuggestedOffer, bac44.Chain_SuggestedOffer) IS NOT NULL
 			THEN bbi.Quantity 
-			END) AS FLOAT) [avg_ActualR43_Offer]
+			END) AS FLOAT) [avg_ActualR43_Offer],
+	COUNT(bal42.Location_SuggestedOffer) [count_r42LocationOffers],
+	COUNT(bal44.Location_SuggestedOffer) [count_r44LocationOffers]
 FROM BUYS..BuyBinHeader bbh
 	INNER JOIN BUYS..BuyBinItems bbi
 		ON bbh.LocationNo = bbi.LocationNo
@@ -237,15 +239,15 @@ FROM BUYS..BuyBinHeader bbh
 
 	LEFT OUTER JOIN #SO_Chain_R42 bac42
 		ON spm.CatalogID = bac42.CatalogID
-	LEFT OUTER JOIN #SO_Chain_R43 bac43
-		ON spm.CatalogID = bac43.CatalogID
+	LEFT OUTER JOIN #SO_Chain_R44 bac44
+		ON spm.CatalogID = bac44.CatalogID
 
 	LEFT OUTER JOIN #SO_Location_R42 bal42
 		ON spm.CatalogID = bal42.CatalogID
 		AND bbi.LocationNo = bal42.LocationNo
-	LEFT OUTER JOIN #SO_Location_R43 bal43
-		ON spm.CatalogID = bal43.CatalogID
-		AND bbi.LocationNo = bal43.LocationNo
+	LEFT OUTER JOIN #SO_Location_R44 bal44
+		ON spm.CatalogID = bal44.CatalogID
+		AND bbi.LocationNo = bal44.LocationNo
 WHERE bbh.StatusCode = 1
   AND bbi.StatusCode = 1
   AND bbh.CreateTime >= @StartDate
@@ -255,7 +257,7 @@ WHERE bbh.StatusCode = 1
 
 DROP TABLE #SOLocs
 DROP TABLE #SO_Chain_R42
-DROP TABLE #SO_Chain_R43
+DROP TABLE #SO_Chain_R44
 DROP TABLE #SO_Location_R42
-DROP TABLE #SO_Location_R43
+DROP TABLE #SO_Location_R44
   

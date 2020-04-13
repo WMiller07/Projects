@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+     <meta charset="UTF-8">
+	 <title>iStore Sales Daily Report</title>
+<script src="static/bootstrap.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+<link href="static/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="static/custom.css" rel="stylesheet" type="text/css">
+<link href="static/print.css" media="print" rel="stylesheet" type="text/css">
+</head>
+<body class="text-white" style="background-color: black">
+
+	<!-- <nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+		  <div class="navbar-header">
+			<button type="button" class="navbar-toggle expanded" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			</button>
+		  </div>
+		  <div id="navbar" class="navbar-default">
+			<ul class="nav navbar-nav text-white">
+			  <li class="active"><a href="#">Home</a></li>
+			  <li><a href="#">About</a></li>
+			  <li><a href="#">Contact</a></li>
+			</ul>
+		  </div>
+		</div>
+	  </nav> -->
+<main role="main" class="container">
+	<div class="starter-template">
+
+		<div style="margin-top: 50px; ">
+			<a name="TotaliStoreSales"></a> 
+			<!-- <h5>iStore Sales by Thicket</h5> -->
+			<script>var graphs = {{div_TotaliStoreSales | safe}}</script>
+		</div>
+
+		<div style="margin-top: 50px; ">
+			<a name="TotaliStoreOrderCountAvgPrice"></a> 
+			<!-- <h5>iStore Sales by Thicket</h5> -->
+			<script>var graphs = {{div_iStoreOrderCountAvgPrice | safe}}</script>
+		</div>
+
+		<div style="margin-top: 50px; ">
+			<a name="iStoreSalesByThicket"></a> 
+			<!-- <h5>iStore Sales by Thicket</h5> -->
+			<script>var graphs = {{div_iStoreSalesByThicket | safe}}</script>
+		</div>
+
+		<div style="margin-top: 50px; ">
+			<a name="iStoreSalesByThicketDetail"></a> 
+			<!-- <h5>iStore Sales by Thicket</h5> -->
+			<script>var graphs = {{div_iStoreSalesByThicketDetail | safe}}</script>
+		</div>
+
+		<div style="margin-top: 50px; ">
+			<a name="iStoreInventoryASRByThicket"></a> 
+			<script>var graphs = {{div_invAgedQty | safe}}</script>
+		</div>
+
+		<div style="margin-top: 50px; ">
+			<a name="iStoreInventoryASRByThicket"></a> 
+			<script>var graphs = {{div_invASRQty | safe}}</script>
+			<p>Note: Not all items have an associated Amazon Sales Rank. Total quantities do not match total actually listed.</p>
+		</div>
+
+		
+	</div>	  
+</main>	
+
+
+
+</body>
+</html>

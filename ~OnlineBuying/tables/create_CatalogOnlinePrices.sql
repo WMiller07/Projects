@@ -1,0 +1,24 @@
+USE [Buy_Analytics_Test]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CatalogOnlinePrices](
+	[CatalogID] [bigint] NOT NULL,
+	[AmazonLowestPrice] [money] NULL,
+	[LastUpdated] [datetime2](2) NULL
+ CONSTRAINT [PK_CatalogOnlinePrices] PRIMARY KEY CLUSTERED 
+(
+	[CatalogID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+
+
